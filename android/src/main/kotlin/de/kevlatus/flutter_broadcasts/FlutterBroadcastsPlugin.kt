@@ -1,5 +1,6 @@
 package de.kevlatus.flutter_broadcasts
 
+import android.os.Build;
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -46,7 +47,11 @@ class CustomBroadcastReceiver(
     }
 
     fun start(context: Context) {
-        context.registerReceiver(this, intentFilter, Context.RECEIVER_NOT_EXPORTED)
+        if (Build.VERSION.SDK_INT > 33) {
+            context.registerReceiver(this, intentFilter, 2)
+        } else {
+            context.registerReceiver(this, intentFilter)
+        }
         Log.d(TAG, "starting to listen for broadcasts: " + names.joinToString(";"))
     }
 
