@@ -47,11 +47,7 @@ class CustomBroadcastReceiver(
     }
 
     fun start(context: Context) {
-        if (Build.VERSION.SDK_INT > 33) {
-            context.registerReceiver(this, intentFilter, 2)
-        } else {
-            context.registerReceiver(this, intentFilter)
-        }
+        context.registerReceiver(this, intentFilter, 4)
         Log.d(TAG, "starting to listen for broadcasts: " + names.joinToString(";"))
     }
 
